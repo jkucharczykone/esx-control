@@ -87,7 +87,7 @@ class VC():
         s = round(size_bytes / p, 2)
         return "%s %s" % (s, size_name[i])        
 print("#"*80)
-print("Witaj w programie tworzacym plik hosts do ansible w oparciu o maszyny w Twoim VMWarze do ansible")
+print("Ansible hosts file creator, create your hosts file from your VMWare Infrastructure")
 host=input("VMWare Host: ")
 user=input("Login: ")
 vmware=VC(host,user)
@@ -176,4 +176,4 @@ with open("hosts","w") as f:
         for machine in full[k]: 
             f.write("{0} ansible_host={1} cpus={2} ram={3} disk_memory='{4}'\n".format(machine[0],machine[1],machine[2],machine[3],machine[4])) 
 print("#"*80)
-print("Twoj plik hosts:\n{0}/hosts".format(os.path.abspath(os.path.dirname(__file__))))
+print("Your hosts file:\n{0}/hosts".format(os.path.abspath(os.path.dirname(__file__))))
