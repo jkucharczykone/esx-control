@@ -86,7 +86,7 @@ class VC():
         p = math.pow(1024, i)
         s = round(size_bytes / p, 2)
         return "%s %s" % (s, size_name[i])        
-print("#"*80)
+print("#"*60)
 print("Ansible hosts file creator, create your hosts file from your VMWare Infrastructure")
 host=input("VMWare Host: ")
 user=input("Login: ")
@@ -170,10 +170,14 @@ for y,v in klucze.items():
         #if y in dicter2.keys(): 
         #    temp+=dicter2[y] 
     full[v]=temp 
+machine_counter=0
 with open("hosts","w") as f: 
     for k in full: 
         f.write("[{0}]\n".format(k)) 
         for machine in full[k]: 
+            machine_counter+=1
             f.write("{0} ansible_host={1} cpus={2} ram={3} disk_memory='{4}'\n".format(machine[0],machine[1],machine[2],machine[3],machine[4])) 
-print("#"*80)
-print("Your hosts file:\n{0}/hosts".format(os.path.abspath(os.path.dirname(__file__))))
+print("#"*60)
+print("Found {0} machines".format(machine_counter))
+print("Your hosts file:\n{0}\hosts".format(os.path.abspath(os.path.dirname(__file__))))
+end=input("Press any key to quit.")
