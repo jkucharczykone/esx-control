@@ -103,5 +103,5 @@ class VC():
             self.machines[machine]["operacje"]={"pid":cmdoutput,"sciezka_programu":command,"argumenty":arguments}
 # host=input("Host: ")
 # user=input("Login: ")
-# pap=VC(host,user)
+# vmware=VC(host,user)
 # embed()
