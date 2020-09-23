@@ -1,0 +1,4 @@
+main.spec
+hosts
+__pycache__
+./dist/hosts
