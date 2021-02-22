@@ -14,15 +14,30 @@ class VC():
             self.vc=connect.SmartConnectSSL(host=host,user=user,pwd=pwd)
         except:
             self.vc=connect.SmartConnectNoSSL(host=host,user=user,pwd=pwd)
+    def szuwar_czasu(self,machine):
+        for j in machine.childEntity:
+            if "Folder" in j.__str__():
+               return self.szuwar_czasu(j)
+            else:
+               self.machines[j.name]={}
+               self.machines[j.name]["vm"]=j
+               self.get_config(j)
     def get_vms(self):
         self.machines={}
         for datacenter in self.vc.content.rootFolder.childEntity:
             for machine in datacenter.vmFolder.childEntity:
                 if "Folder" in machine.__str__():
-                    for j in machine.childEntity:
-                        self.machines[j.name]={}
-                        self.machines[j.name]["vm"]=j
-                        self.get_config(j)
+                    self.szuwar_czasu(machine)
+                    #for j in machine.childEntity:
+                    #    if "Folder" in j.__str__():
+                    #        for xx in j.childEntity:
+                    #           self.machines[xx.name]={}
+                    #           self.machines[xx.name]["vm"]=xx
+                    #           self.get_config(xx)
+                    #    else:
+                    #        self.machines[j.name]={}
+                    #        self.machines[j.name]["vm"]=j
+                    #        self.get_config(j)
                 else:
                     self.machines[machine.name]={}
                     self.machines[machine.name]["vm"]=machine
